@@ -73,6 +73,30 @@
         ::-webkit-scrollbar-thumb { background: #CD9B53; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #EBCE85; }
         * { scrollbar-width: thin; scrollbar-color: #CD9B53 #143529; }
+
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            background: linear-gradient(to right, #B87A40, #EBCE85, #CD9B53);
+            background-size: 200% auto;
+            border: 1px solid rgba(235, 206, 133, 0.5);
+            color: #03110C;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 1.25rem 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 0 30px rgba(205, 155, 83, 0.4);
+            transition: all 0.3s ease, background-position 0.5s ease;
+            cursor: pointer;
+        }
+        .btn-cta:hover {
+            background-position: right center;
+            box-shadow: 0 0 50px rgba(205, 155, 83, 0.6);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-textPrimary font-sans antialiased selection:bg-brand-primary selection:text-white">
@@ -93,6 +117,10 @@
                     </a> 
                     <a href="#conteudo" class="text-xs font-bold uppercase tracking-[0.1em] text-gray-400 hover:text-white transition-colors duration-300 relative group"> 
                         Conteúdo 
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-brand-primary transition-all duration-300 group-hover:w-full group-hover:left-0"></span> 
+                    </a> 
+                    <a href="#publico" class="text-xs font-bold uppercase tracking-[0.1em] text-gray-400 hover:text-white transition-colors duration-300 relative group"> 
+                        Público 
                         <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-brand-primary transition-all duration-300 group-hover:w-full group-hover:left-0"></span> 
                     </a> 
                     <a href="#mentores" class="text-xs font-bold uppercase tracking-[0.1em] text-gray-400 hover:text-white transition-colors duration-300 relative group"> 
@@ -116,38 +144,38 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <header class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
+    <header id="hero" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <!-- Background abstrato premium -->
-            <div class="absolute inset-0 bg-[#052F24]"></div>
-            <div class="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-brand-primary/10 rounded-full blur-[150px]"></div>
-            <div class="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-brand-surface/20 rounded-full blur-[150px]"></div>
+            <div class="absolute inset-0 bg-[#052F24] bg-cover bg-center bg-no-repeat md:hidden" style="background-image: url('assets/mobile.webp');"></div>
+            <div class="absolute inset-0 bg-[#052F24] bg-cover bg-center bg-no-repeat hidden md:block" style="background-image: url('assets/web.webp');"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-bg/55 via-brand-bg/30 to-brand-bg/10 md:hidden"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-bg/90 via-brand-bg/50 to-transparent hidden md:block"></div>
         </div>
 
-        <div class="container mx-auto px-6 max-w-[1300px] relative z-10 flex flex-col items-start text-left">
-            <img src="assets/dourado.svg" alt="Workshop 10K" class="h-40 w-auto mb-6 object-contain" data-aos="fade-down">
+        <div class="container mx-auto px-6 max-w-[1300px] relative z-10 flex flex-col items-center text-center md:items-start md:text-left">
+            <img src="assets/dourado.svg" alt="Workshop 10K" class="hidden md:block h-40 w-auto mb-6 object-contain" data-aos="fade-down">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-primary/50 bg-brand-primary/15 text-[#EBCE85] text-xs font-bold uppercase tracking-[0.2em] mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(205,155,83,0.2)]" data-aos="fade-down" data-aos-delay="100">
                 <span class="w-2 h-2 rounded-full bg-brand-primary animate-pulse"></span>
                 Workshop 100% Online e Ao Vivo
             </div>
             
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black font-oswald uppercase leading-[1.1] text-white max-w-5xl" data-aos="fade-up" data-aos-delay="100">
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black font-oswald uppercase leading-[1.1] text-white max-w-3xl md:max-w-xl lg:max-w-2xl mx-auto md:mx-0" data-aos="fade-up" data-aos-delay="100">
                 Como estruturar, vender e faturar seus <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#CD9B53] via-[#EBCE85] to-[#B87A40]">primeiros 10K</span> com consultoria online
             </h1>
             
-            <p class="text-base  text-brand-textSecondary max-w-3xl font-medium mt-6 mb-10" data-aos="fade-up" data-aos-delay="200">
+            <p class="text-lg text-brand-textSecondary max-w-2xl md:max-w-md lg:max-w-lg font-medium mt-6 mb-10 mx-auto md:mx-0" data-aos="fade-up" data-aos-delay="200">
                 O caminho direto ao ponto para personal trainers que querem parar de depender só do presencial, mesmo começando do zero.
             </p>
             
-            <div class="flex flex-col sm:flex-row items-center gap-6 justify-start mb-12" data-aos="zoom-in" data-aos-delay="300">
-                <div class="flex items-center gap-4 bg-white/5 border border-white/10 backdrop-blur-md px-6 py-4 rounded-2xl shadow-xl">
+            <div class="flex flex-col sm:flex-row items-center gap-6 justify-center md:justify-start mb-12" data-aos="zoom-in" data-aos-delay="300">
+                <div class="flex items-center gap-4 bg-white/5 border border-white/10 backdrop-blur-md px-6 py-4 rounded-2xl shadow-xl w-full sm:w-auto">
                     <i class="fas fa-calendar-alt text-brand-primary text-2xl"></i>
                     <div class="text-left">
                         <div class="text-[10px] text-brand-textMuted uppercase font-bold tracking-widest">Data</div>
                         <div class="text-white font-bold text-base">Sábado, 14 de Junho 2026</div>
                     </div>
                 </div>
-                <div class="flex items-center gap-4 bg-white/5 border border-white/10 backdrop-blur-md px-6 py-4 rounded-2xl shadow-xl">
+                <div class="flex items-center gap-4 bg-white/5 border border-white/10 backdrop-blur-md px-6 py-4 rounded-2xl shadow-xl w-full sm:w-auto">
                     <i class="fas fa-clock text-brand-primary text-2xl"></i>
                     <div class="text-left">
                         <div class="text-[10px] text-brand-textMuted uppercase font-bold tracking-widest">Horário</div>
@@ -156,7 +184,7 @@
                 </div>
             </div>
 
-            <button onclick="abrirPopup()" class="w-full sm:w-auto bg-gradient-to-r from-[#B87A40] via-[#EBCE85] to-[#CD9B53] bg-[length:200%_auto] hover:bg-right border border-[#EBCE85]/50 transition-all duration-500 text-brand-darkgray font-black uppercase tracking-[0.1em] py-5 px-12 rounded-xl transition-all duration-300 shadow-[0_0_30px_rgba(205,155,83,0.4)] hover:shadow-[0_0_50px_rgba(205,155,83,0.6)] hover:-translate-y-1 flex items-center justify-start gap-3" data-aos="fade-up" data-aos-delay="400">
+            <button type="button" onclick="abrirPopup()" class="btn-cta w-full sm:w-auto" data-aos="fade-up" data-aos-delay="400">
                 Garantir Minha Vaga por R$ 9,90 <i class="fas fa-arrow-right"></i>
             </button>
         </div>
@@ -190,6 +218,11 @@
                         <li class="flex items-start gap-3"><i class="fas fa-exclamation-circle text-brand-accent mt-1"></i> <span class="text-white/80">Como vender pelo Instagram e WhatsApp</span></li>
                     </ul>
                 </div>
+            </div>
+            <div class="mt-16 text-center" data-aos="fade-up">
+                <button type="button" onclick="abrirPopup()" class="btn-cta">
+                    Garantir Minha Vaga por R$ 9,90 <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -259,11 +292,16 @@
                 <h4 class="text-xl font-bold font-oswald uppercase text-white mb-2">Encerramento <span class="text-brand-primary">(11h45)</span></h4>
                 <p class="text-brand-textSecondary">Plano de ação para aplicar imediatamente e chegar nos 10K. <br>E apresentação exclusiva da nossa mentoria principal para quem quiser ir além.</p>
             </div>
+            <div class="mt-16 text-center" data-aos="fade-up">
+                <button type="button" onclick="abrirPopup()" class="btn-cta">
+                    Garantir Minha Vaga por R$ 9,90 <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
     </section>
 
     <!-- SECTION: PÚBLICO ALVO -->
-    <section class="py-24 relative overflow-hidden bg-[#03110C]">
+    <section id="publico" class="py-24 relative overflow-hidden bg-[#03110C]">
         <div class="absolute inset-0 z-0">
             <div class="absolute top-1/2 left-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[120px] -translate-y-1/2"></div>
             <div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-red-500/5 rounded-full blur-[120px] -translate-y-1/2"></div>
@@ -354,6 +392,11 @@
                     </div>
                 </div>
             </div>
+            <div class="mt-16 text-center" data-aos="fade-up">
+                <button type="button" onclick="abrirPopup()" class="btn-cta">
+                    Garantir Minha Vaga por R$ 9,90 <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -367,8 +410,8 @@
 
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-xl hover:shadow-[0_0_40px_rgba(205,155,83,0.25)] hover:border-[#CD9B53]/30 transition-all duration-500" data-aos="fade-up">
-                    <div class="w-32 h-32 mx-auto bg-brand-surface rounded-full border-4 border-[#CD9B53] shadow-[0_0_30px_rgba(205,155,83,0.3)] flex items-center justify-center mb-6 overflow-hidden">
-                        <i class="fas fa-user-tie text-5xl text-brand-primary/50"></i>
+                    <div class="w-88 h-88 md:w-96 md:h-96 mx-auto rounded-full border-4 border-[#CD9B53] shadow-[0_0_30px_rgba(205,155,83,0.3)] mb-6 overflow-hidden">
+                        <img src="assets/rafael.webp" alt="Rafael Tonietto" class="w-full h-full object-cover object-top">
                     </div>
                     <h4 class="text-2xl font-black font-oswald uppercase text-white mb-2">Rafael Tonietto</h4>
                     <p class="text-brand-primary font-semibold text-base uppercase tracking-widest mb-4">Especialista em Posicionamento</p>
@@ -376,13 +419,18 @@
                 </div>
 
                 <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-xl hover:shadow-[0_0_40px_rgba(205,155,83,0.25)] hover:border-[#CD9B53]/30 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-32 h-32 mx-auto bg-brand-surface rounded-full border-4 border-[#CD9B53] shadow-[0_0_30px_rgba(205,155,83,0.3)] flex items-center justify-center mb-6 overflow-hidden">
-                        <i class="fas fa-chart-line text-5xl text-brand-primary/50"></i>
+                    <div class="w-88 h-88 md:w-96 md:h-96 mx-auto rounded-full border-4 border-[#CD9B53] shadow-[0_0_30px_rgba(205,155,83,0.3)] mb-6 overflow-hidden">
+                        <img src="assets/artur.webp" alt="Artur Monteiro" class="w-full h-full object-cover object-top">
                     </div>
                     <h4 class="text-2xl font-black font-oswald uppercase text-white mb-2">Artur Monteiro</h4>
                     <p class="text-brand-primary font-semibold text-base uppercase tracking-widest mb-4">Especialista em Negócios</p>
                     <p class="text-brand-textSecondary text-base">Estrategista em marketing e negócios focados em escala. Vai te ensinar exatamente como escalar a sua carreira e faturar múltiplos dígitos.</p>
                 </div>
+            </div>
+            <div class="mt-16 text-center" data-aos="fade-up">
+                <button type="button" onclick="abrirPopup()" class="btn-cta">
+                    Garantir Minha Vaga por R$ 9,90 <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -401,20 +449,40 @@
                 <strong>Ou pode aprender o caminho certo e começar a construir uma renda que te leve aos primeiros 10K. A decisão é sua.</strong>
             </p>
 
-            <div class="glass-strong border-2 border-brand-primary rounded-3xl p-10 mt-12 max-w-2xl mx-auto shadow-[0_0_50px_rgba(205,155,83,0.2)]" data-aos="fade-up" data-aos-delay="200">
-                <p class="text-brand-textMuted font-bold uppercase tracking-widest mb-4">O que você recebe hoje:</p>
-                <ul class="text-left space-y-3 mb-8 text-white font-medium">
-                    <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary"></i> Acesso ao workshop completo ao vivo</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary"></i> Estrutura pronta de consultoria online</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary"></i> Roteiros simples de venda</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary"></i> Direcionamento claro de conteúdo</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary"></i> Plano de ação pra chegar nos 10K</li>
+            <div class="glass-strong border-2 border-brand-primary rounded-3xl p-10 md:p-12 mt-12 max-w-2xl mx-auto shadow-[0_0_50px_rgba(205,155,83,0.2)] flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="200">
+                <p class="text-brand-textMuted text-xs font-bold uppercase tracking-[0.2em] mb-8">O que você recebe hoje</p>
+
+                <ul class="w-full max-w-sm space-y-4 mb-10">
+                    <li class="flex items-center justify-center gap-3 text-white font-medium text-base">
+                        <i class="fas fa-check text-brand-primary shrink-0"></i>
+                        <span>Acesso ao workshop completo ao vivo</span>
+                    </li>
+                    <li class="flex items-center justify-center gap-3 text-white font-medium text-base">
+                        <i class="fas fa-check text-brand-primary shrink-0"></i>
+                        <span>Estrutura pronta de consultoria online</span>
+                    </li>
+                    <li class="flex items-center justify-center gap-3 text-white font-medium text-base">
+                        <i class="fas fa-check text-brand-primary shrink-0"></i>
+                        <span>Roteiros simples de venda</span>
+                    </li>
+                    <li class="flex items-center justify-center gap-3 text-white font-medium text-base">
+                        <i class="fas fa-check text-brand-primary shrink-0"></i>
+                        <span>Direcionamento claro de conteúdo</span>
+                    </li>
+                    <li class="flex items-center justify-center gap-3 text-white font-medium text-base">
+                        <i class="fas fa-check text-brand-primary shrink-0"></i>
+                        <span>Plano de ação pra chegar nos 10K</span>
+                    </li>
                 </ul>
 
-                <div class="text-6xl font-black text-white mb-6">R$ 9,90</div>
-                <p class="text-base text-brand-primary mb-8 font-semibold">Menos de R$ 10 para transformar sua carreira.</p>
+                <div class="w-full max-w-xs h-px bg-gradient-to-r from-transparent via-brand-primary/40 to-transparent mb-10"></div>
 
-                <button onclick="abrirPopup()" class="w-full bg-gradient-to-r from-[#B87A40] via-[#EBCE85] to-[#CD9B53] bg-[length:200%_auto] hover:bg-right border border-[#EBCE85]/50 transition-all duration-500 text-brand-darkgray font-black text-lg uppercase tracking-[0.1em] py-6 rounded-xl transition-all duration-300 shadow-[0_0_40px_rgba(205,155,83,0.5)] hover:shadow-[0_0_60px_rgba(205,155,83,0.7)] hover:-translate-y-1 animate-pulse-slow">
+                <div class="mb-10">
+                    <div class="text-5xl md:text-6xl font-black text-white leading-none mb-3">R$ 9,90</div>
+                    <p class="text-base text-brand-primary font-semibold">Menos de R$ 10 para transformar sua carreira.</p>
+                </div>
+
+                <button type="button" onclick="abrirPopup()" class="btn-cta w-full max-w-md text-lg animate-pulse-slow">
                     Quero Garantir Minha Vaga
                 </button>
             </div>
@@ -422,7 +490,7 @@
     </section>
 
     <!-- FOOTER OBRIGATÓRIO -->
-    <footer class="bg-brand-darkgray border-t border-white/5 pt-16 pb-24 relative z-20"> 
+    <footer id="footer" class="bg-brand-darkgray border-t border-white/5 pt-16 pb-24 relative z-20"> 
         <div class="container mx-auto px-6 max-w-[1300px]"> 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-12"> 
                 <div class="lg:col-span-4 space-y-4"> 
@@ -434,8 +502,10 @@
                 <div class="lg:col-span-2 lg:col-start-7"> 
                     <h4 class="text-brand-textSecondary font-bold uppercase tracking-widest text-xs mb-6">Navegação</h4> 
                     <ul class="space-y-3 text-base text-brand-textMuted"> 
+                        <li><a href="#hero" class="hover:text-brand-primary transition-colors duration-200">Início</a></li>
                         <li><a href="#problema" class="hover:text-brand-primary transition-colors duration-200">Por Que</a></li>
                         <li><a href="#conteudo" class="hover:text-brand-primary transition-colors duration-200">Conteúdo</a></li>
+                        <li><a href="#publico" class="hover:text-brand-primary transition-colors duration-200">Público</a></li>
                         <li><a href="#mentores" class="hover:text-brand-primary transition-colors duration-200">Mentores</a></li>
                         <li><a href="#oferta" class="hover:text-brand-primary transition-colors duration-200">Acesso</a></li>
                     </ul> 
@@ -589,13 +659,12 @@
 
             const nome = document.getElementById('lead-nome').value.trim();
             const email = document.getElementById('lead-email').value.trim();
-            const telefoneFormatado = '+55' + rawPhone;
+            const telefone = '+55' + rawPhone;
 
-            // Payload Obrigatório
             const payload = {
                 nome: nome,
                 email: email,
-                telefone: telefoneFormatado,
+                telefone: telefone,
                 utm_source: document.getElementById('utm_source')?.value || '',
                 utm_term: document.getElementById('utm_term')?.value || '',
                 utm_campaign: document.getElementById('utm_campaign')?.value || '',
@@ -604,14 +673,10 @@
                 url: document.getElementById('url')?.value || window.location.href
             };
 
-            // URL do Webhook Geral + Nomenclatura no link
-            const WEBHOOK_URL = 'https://hook.us1.make.com/bj1q14346ezeybpcqjb9ctea89aoatvn?produto=WORKSHOP_10K';
-            
-            // Redirecionamento temporário para o WhatsApp (já que não há checkout definido)
-            const BASE_REDIRECT_URL = 'https://wa.me/5541988239396?text=Quero%20garantir%20minha%20vaga%20no%20Workshop%2010K';
+            const WEBHOOK_URL = 'https://hook.us1.make.com/bj1q14346ezeybpcqjb9ctea89aoatvn?produto=W-10K';
+            const BASE_REDIRECT_URL = 'https://chk.eduzz.com/KW8ZVAQR01';
 
             try {
-                // Fetch para o Make
                 await fetch(WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -620,10 +685,19 @@
             } catch (error) {
                 console.error("Erro ao enviar dados para o webhook. Executando fallback.", error);
             } finally {
-                // Monta Query String e redireciona (Fallback rigoroso)
-                const queryString = `&name=${encodeURIComponent(payload.nome)}&email=${encodeURIComponent(payload.email)}&phone=${encodeURIComponent(payload.telefone)}&utm_source=${encodeURIComponent(payload.utm_source)}&utm_campaign=${encodeURIComponent(payload.utm_campaign)}`;
-                
-                window.location.href = BASE_REDIRECT_URL + queryString;
+                const checkoutParams = new URLSearchParams({
+                    name: payload.nome,
+                    email: payload.email,
+                    telefone: payload.telefone,
+                    utm_source: payload.utm_source,
+                    utm_term: payload.utm_term,
+                    utm_campaign: payload.utm_campaign,
+                    utm_medium: payload.utm_medium,
+                    utm_content: payload.utm_content,
+                    url: payload.url
+                });
+
+                window.location.href = `${BASE_REDIRECT_URL}?${checkoutParams.toString()}`;
             }
         });
     </script>
