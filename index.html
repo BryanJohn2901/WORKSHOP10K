@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop 10K com Consultoria Online</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#071F16',        
+                            surface: '#0A2D20',   
+                            primary: '#CD9B53',   
+                            primaryHover: '#EBCE85',
+                            accent: '#B87A40',    
+                            textPrimary: '#FFFFFF',
+                            textSecondary: '#D0D5DD',
+                            textMuted: '#98A2B3',
+                            darkgray: '#03110C',
+                            success: '#0CC143',
+                            border: 'rgba(255, 255, 255, 0.05)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        oswald: ['Oswald', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                    },
+                    keyframes: {
+                        shimmer: {
+                            '100%': { transform: 'translateX(100%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Glassmorphism base */
+        .glass-strong {
+            background: rgba(20, 53, 41, 0.85); /* brand-bg com opacidade */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #143529; }
+        ::-webkit-scrollbar-thumb { background: #CD9B53; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #EBCE85; }
+        * { scrollbar-width: thin; scrollbar-color: #CD9B53 #143529; }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-textPrimary font-sans antialiased selection:bg-brand-primary selection:text-white">
+
+    <!-- NAVBAR FIXA OBRIGATÓRIA -->
+    <nav class="fixed top-6 left-0 right-0 z-50 px-4 md:px-0 hidden md:block" data-aos="fade-down" data-aos-duration="1000"> 
+        <div class="container mx-auto max-w-5xl"> 
+            <div class="relative flex items-center justify-between px-6 py-3 rounded-full glass-strong shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] transition-all duration-300 hover:border-brand-primary/40 hover:shadow-[0_12px_40px_0_rgba(205,155,83,0.15)]"> 
+                
+                <a href="#" class="block hover:opacity-80 transition-opacity duration-300 flex items-center shrink-0">
+                    <img src="assets/logoPTA.svg" alt="PTA" class="h-14 w-auto">
+                </a>
+
+                <div class="hidden md:flex items-center gap-8"> 
+                    <a href="#problema" class="text-xs font-bold uppercase tracking-[0.1em] text-gray-400 hover:text-white transition-colors duration-300 relative group"> 
+                        Por Que
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-brand-primary transition-all duration-300 group-hover:w-full group-hover:left-0"></span> 
+                    </a> 
+                    <a href="#conteudo" class="text-xs font-bold uppercase tracking-[0.1em] text-gray-400 hover:text-white transition-colors duration-300 relative group"> 
+                        Conteúdo 
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-brand-primary transition-all duration-300 group-hover:w-full group-hover:left-0"></span> 
+                    </a> 
+                    <a href="#mentores" class="text-xs font-bold uppercase tracking-[0.1em] text-gray-400 hover:text-white transition-colors duration-300 relative group"> 
+                        Mentores 
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-brand-primary transition-all duration-300 group-hover:w-full group-hover:left-0"></span> 
+                    </a> 
+                    <a href="#oferta" class="text-xs font-bold uppercase tracking-[0.1em] text-gray-400 hover:text-white transition-colors duration-300 relative group"> 
+                        Acesso 
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-brand-primary transition-all duration-300 group-hover:w-full group-hover:left-0"></span> 
+                    </a> 
+                </div> 
+
+                <button onclick="abrirPopup()" class="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-[#B87A40] via-[#EBCE85] to-[#CD9B53] bg-[length:200%_auto] hover:bg-right border border-[#EBCE85]/50 transition-all duration-500 px-10 py-4 transition-all duration-300 shadow-[0_0_30px_rgba(205,155,83,0.4)] hover:shadow-[0_0_50px_rgba(205,155,83,0.6)] hover:-translate-y-0.5 cursor-pointer border-0 shrink-0"> 
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div> 
+                    <span class="relative text-xs font-bold uppercase tracking-[0.2em] text-brand-darkgray"> 
+                        Inscreva-se 
+                    </span> 
+                </button> 
+            </div> 
+        </div> 
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <!-- Background abstrato premium -->
+            <div class="absolute inset-0 bg-[#052F24]"></div>
+            <div class="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-brand-primary/10 rounded-full blur-[150px]"></div>
+            <div class="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-brand-surface/20 rounded-full blur-[150px]"></div>
+        </div>
+
+        <div class="container mx-auto px-6 max-w-[1300px] relative z-10 flex flex-col items-start text-left">
+            <img src="assets/dourado.svg" alt="Workshop 10K" class="h-40 w-auto mb-6 object-contain" data-aos="fade-down">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-primary/50 bg-brand-primary/15 text-[#EBCE85] text-xs font-bold uppercase tracking-[0.2em] mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(205,155,83,0.2)]" data-aos="fade-down" data-aos-delay="100">
+                <span class="w-2 h-2 rounded-full bg-brand-primary animate-pulse"></span>
+                Workshop 100% Online e Ao Vivo
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black font-oswald uppercase leading-[1.1] text-white max-w-5xl" data-aos="fade-up" data-aos-delay="100">
+                Como estruturar, vender e faturar seus <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#CD9B53] via-[#EBCE85] to-[#B87A40]">primeiros 10K</span> com consultoria online
+            </h1>
+            
+            <p class="text-base  text-brand-textSecondary max-w-3xl font-medium mt-6 mb-10" data-aos="fade-up" data-aos-delay="200">
+                O caminho direto ao ponto para personal trainers que querem parar de depender só do presencial, mesmo começando do zero.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center gap-6 justify-start mb-12" data-aos="zoom-in" data-aos-delay="300">
+                <div class="flex items-center gap-4 bg-white/5 border border-white/10 backdrop-blur-md px-6 py-4 rounded-2xl shadow-xl">
+                    <i class="fas fa-calendar-alt text-brand-primary text-2xl"></i>
+                    <div class="text-left">
+                        <div class="text-[10px] text-brand-textMuted uppercase font-bold tracking-widest">Data</div>
+                        <div class="text-white font-bold text-base">Sábado, 14 de Junho 2026</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 bg-white/5 border border-white/10 backdrop-blur-md px-6 py-4 rounded-2xl shadow-xl">
+                    <i class="fas fa-clock text-brand-primary text-2xl"></i>
+                    <div class="text-left">
+                        <div class="text-[10px] text-brand-textMuted uppercase font-bold tracking-widest">Horário</div>
+                        <div class="text-white font-bold text-base">08h30 ao Meio-dia</div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="abrirPopup()" class="w-full sm:w-auto bg-gradient-to-r from-[#B87A40] via-[#EBCE85] to-[#CD9B53] bg-[length:200%_auto] hover:bg-right border border-[#EBCE85]/50 transition-all duration-500 text-brand-darkgray font-black uppercase tracking-[0.1em] py-5 px-12 rounded-xl transition-all duration-300 shadow-[0_0_30px_rgba(205,155,83,0.4)] hover:shadow-[0_0_50px_rgba(205,155,83,0.6)] hover:-translate-y-1 flex items-center justify-start gap-3" data-aos="fade-up" data-aos-delay="400">
+                Garantir Minha Vaga por R$ 9,90 <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- SECTION: A DOR / PROBLEMA -->
+    <section id="problema" class="py-24 relative overflow-hidden bg-[#0d221a] border-y border-white/5">
+        <div class="container mx-auto px-6 max-w-[1300px] relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl md:text-5xl font-black font-oswald uppercase leading-tight text-white mb-6">
+                        Se você sente que está <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-400">travado no presencial...</span>
+                    </h2>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-base text-brand-textSecondary"><i class="fas fa-times text-red-500"></i> Trabalha muito</li>
+                        <li class="flex items-center gap-3 text-base text-brand-textSecondary"><i class="fas fa-times text-red-500"></i> Ganha pouco</li>
+                        <li class="flex items-center gap-3 text-base text-brand-textSecondary"><i class="fas fa-times text-red-500"></i> Depende exclusivamente de horário</li>
+                        <li class="flex items-center gap-3 text-base text-brand-textSecondary"><i class="fas fa-times text-red-500"></i> Não consegue escalar seus ganhos</li>
+                    </ul>
+                </div>
+                
+                <div class="glass-strong p-10 rounded-3xl relative" data-aos="fade-left">
+                    <div class="absolute -top-4 -left-4 text-6xl text-brand-primary/20"><i class="fas fa-quote-left"></i></div>
+                    <h3 class="text-xl font-bold font-oswald text-white mb-6 uppercase tracking-wider border-b border-white/10 pb-4">Presta atenção nisso:</h3>
+                    <p class="text-brand-primary text-base font-bold mb-4">O seu problema não é falta de conhecimento técnico.</p>
+                    <p class="text-brand-textSecondary leading-relaxed mb-6">O problema é que você não sabe transformar isso em faturamento. Você não sabe:</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3"><i class="fas fa-exclamation-circle text-brand-accent mt-1"></i> <span class="text-white/80">Como montar uma consultoria online</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-exclamation-circle text-brand-accent mt-1"></i> <span class="text-white/80">Como definir preço</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-exclamation-circle text-brand-accent mt-1"></i> <span class="text-white/80">Como atrair alunos todos os dias</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-exclamation-circle text-brand-accent mt-1"></i> <span class="text-white/80">Como vender pelo Instagram e WhatsApp</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: CONTEÚDO (O WORKSHOP) -->
+    <section id="conteudo" class="py-24 relative overflow-hidden bg-brand-bg">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 max-w-[1300px] relative z-10">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-brand-primary text-xs font-bold uppercase tracking-[0.2em] mb-4">O Evento</h2>
+                <h3 class="text-3xl md:text-5xl font-black font-oswald uppercase text-white leading-tight">
+                    Um Workshop <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#CD9B53] via-[#EBCE85] to-[#B87A40]">Direto ao Ponto</span>
+                </h3>
+                <p class="text-brand-textSecondary mt-4 max-w-2xl mx-auto">Sem enrolação. Sem teoria desnecessária. Sem complicação. Exatamente o que você vai aprender:</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Bloco 1 -->
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-xl hover:border-[#CD9B53]/40 hover:bg-white/[0.07] hover:shadow-[0_0_40px_rgba(205,155,83,0.15)] transition-all duration-500 relative group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-0 right-0 bg-brand-primary/20 text-brand-primary text-xs font-bold px-4 py-2 rounded-bl-xl rounded-tr-3xl uppercase tracking-widest">Bloco 1</div>
+                    <div class="w-14 h-14 rounded-2xl bg-brand-surface border border-white/10 flex items-center justify-center text-brand-primary text-2xl mb-6 shadow-lg">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h4 class="text-2xl font-black font-oswald uppercase text-white mb-4">Estrutura <span class="block text-sm text-brand-textMuted font-medium normal-case mt-1">08h30</span></h4>
+                    <p class="text-brand-primary font-semibold mb-4">Como montar do zero:</p>
+                    <ul class="space-y-3 text-base text-brand-textSecondary">
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-brand-primary mt-1"></i> Modelo simples e aplicável</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-brand-primary mt-1"></i> Como estruturar a entrega</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-brand-primary mt-1"></i> Como definir preço e formato</li>
+                    </ul>
+                </div>
+
+                <!-- Bloco 2 -->
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-xl hover:border-[#CD9B53]/40 hover:bg-white/[0.07] hover:shadow-[0_0_40px_rgba(205,155,83,0.15)] transition-all duration-500 relative group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-0 right-0 bg-brand-primary/20 text-brand-primary text-xs font-bold px-4 py-2 rounded-bl-xl rounded-tr-3xl uppercase tracking-widest">Bloco 2</div>
+                    <div class="w-14 h-14 rounded-2xl bg-brand-surface border border-white/10 flex items-center justify-center text-brand-primary text-2xl mb-6 shadow-lg">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4 class="text-2xl font-black font-oswald uppercase text-white mb-4">Posicionamento <span class="block text-sm text-brand-textMuted font-medium normal-case mt-1">09h30</span></h4>
+                    <p class="text-brand-primary font-semibold mb-4">Como atrair alunos:</p>
+                    <ul class="space-y-3 text-base text-brand-textSecondary">
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-brand-primary mt-1"></i> O que postar (Reels e Stories)</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-brand-primary mt-1"></i> Gerar conversas com seguidores</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-brand-primary mt-1"></i> Transformar conteúdo em demanda</li>
+                    </ul>
+                </div>
+
+                <!-- Bloco 3 -->
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-xl hover:border-[#CD9B53]/40 hover:bg-white/[0.07] hover:shadow-[0_0_40px_rgba(205,155,83,0.15)] transition-all duration-500 relative group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute top-0 right-0 bg-brand-primary/20 text-brand-primary text-xs font-bold px-4 py-2 rounded-bl-xl rounded-tr-3xl uppercase tracking-widest">Bloco 3</div>
+                    <div class="w-14 h-14 rounded-2xl bg-brand-surface border border-white/10 flex items-center justify-center text-brand-primary text-2xl mb-6 shadow-lg">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h4 class="text-2xl font-black font-oswald uppercase text-white mb-4">Vendas <span class="block text-sm text-brand-textMuted font-medium normal-case mt-1">10h45</span></h4>
+                    <p class="text-brand-primary font-semibold mb-4">Fechamento prático:</p>
+                    <ul class="space-y-3 text-base text-brand-textSecondary">
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-brand-primary mt-1"></i> Roteiros simples de conversa</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-brand-primary mt-1"></i> Como conduzir o lead até a venda</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check text-brand-primary mt-1"></i> Fazer suas primeiras vendas online</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Encerramento -->
+            <div class="bg-brand-surface border border-brand-primary/30 p-8 rounded-3xl text-center max-w-3xl mx-auto" data-aos="zoom-in">
+                <h4 class="text-xl font-bold font-oswald uppercase text-white mb-2">Encerramento <span class="text-brand-primary">(11h45)</span></h4>
+                <p class="text-brand-textSecondary">Plano de ação para aplicar imediatamente e chegar nos 10K. <br>E apresentação exclusiva da nossa mentoria principal para quem quiser ir além.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: PÚBLICO ALVO -->
+    <section class="py-24 relative overflow-hidden bg-[#03110C]">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-1/2 left-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[120px] -translate-y-1/2"></div>
+            <div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-red-500/5 rounded-full blur-[120px] -translate-y-1/2"></div>
+        </div>
+        <div class="container mx-auto px-6 max-w-[1300px] relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-black font-oswald uppercase text-white leading-tight">
+                    Para quem é esse <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#CD9B53] via-[#EBCE85] to-[#B87A40]">Workshop?</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- PARA QUEM É -->
+                <div class="relative group" data-aos="fade-right">
+                    <div class="absolute inset-0 bg-gradient-to-b from-[#CD9B53]/20 to-transparent rounded-[2rem] blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+                    <div class="relative bg-[#071F16]/80 backdrop-blur-xl border border-[#CD9B53]/30 p-10 lg:p-12 rounded-[2rem] h-full transition-all duration-500 hover:border-[#CD9B53]/60 hover:shadow-[0_0_50px_rgba(205,155,83,0.15)]">
+                        <div class="flex items-center gap-4 mb-8 pb-8 border-b border-[#CD9B53]/20">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#CD9B53] to-[#B87A40] flex items-center justify-center shadow-[0_0_30px_rgba(205,155,83,0.4)]">
+                                <i class="fas fa-check text-2xl text-[#03110C]"></i>
+                            </div>
+                            <h3 class="text-2xl lg:text-3xl font-black font-oswald uppercase text-white tracking-wide">Para Quem <span class="text-[#EBCE85]">É</span></h3>
+                        </div>
+                        <ul class="space-y-6">
+                            <li class="flex items-center gap-4 text-base text-brand-textSecondary group/item">
+                                <div class="w-8 h-8 rounded-full bg-[#CD9B53]/10 border border-[#CD9B53]/30 flex items-center justify-center shrink-0 group-hover/item:bg-[#CD9B53]/30 transition-colors">
+                                    <i class="fas fa-check text-[#EBCE85] text-sm"></i>
+                                </div>
+                                <span>Personal trainer que quer aumentar o faturamento</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-base text-brand-textSecondary group/item">
+                                <div class="w-8 h-8 rounded-full bg-[#CD9B53]/10 border border-[#CD9B53]/30 flex items-center justify-center shrink-0 group-hover/item:bg-[#CD9B53]/30 transition-colors">
+                                    <i class="fas fa-check text-[#EBCE85] text-sm"></i>
+                                </div>
+                                <span>Quem quer parar de depender só do presencial</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-base text-brand-textSecondary group/item">
+                                <div class="w-8 h-8 rounded-full bg-[#CD9B53]/10 border border-[#CD9B53]/30 flex items-center justify-center shrink-0 group-hover/item:bg-[#CD9B53]/30 transition-colors">
+                                    <i class="fas fa-check text-[#EBCE85] text-sm"></i>
+                                </div>
+                                <span>Quem quer começar no online do zero</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-base text-brand-textSecondary group/item">
+                                <div class="w-8 h-8 rounded-full bg-[#CD9B53]/10 border border-[#CD9B53]/30 flex items-center justify-center shrink-0 group-hover/item:bg-[#CD9B53]/30 transition-colors">
+                                    <i class="fas fa-check text-[#EBCE85] text-sm"></i>
+                                </div>
+                                <span>Quem não sabe como vender consultoria</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-base text-brand-textSecondary group/item">
+                                <div class="w-8 h-8 rounded-full bg-[#CD9B53]/10 border border-[#CD9B53]/30 flex items-center justify-center shrink-0 group-hover/item:bg-[#CD9B53]/30 transition-colors">
+                                    <i class="fas fa-check text-[#EBCE85] text-sm"></i>
+                                </div>
+                                <span>Quem quer transformar seguidores em clientes</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- PARA QUEM NÃO É -->
+                <div class="relative group" data-aos="fade-left">
+                    <div class="absolute inset-0 bg-gradient-to-b from-red-500/10 to-transparent rounded-[2rem] blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+                    <div class="relative bg-[#071F16]/80 backdrop-blur-xl border border-red-500/20 p-10 lg:p-12 rounded-[2rem] h-full transition-all duration-500 hover:border-red-500/40 hover:shadow-[0_0_50px_rgba(239,68,68,0.1)]">
+                        <div class="flex items-center gap-4 mb-8 pb-8 border-b border-red-500/10">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.3)]">
+                                <i class="fas fa-times text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-2xl lg:text-3xl font-black font-oswald uppercase text-white tracking-wide">Para Quem <span class="text-red-500">NÃO É</span></h3>
+                        </div>
+                        <ul class="space-y-6">
+                            <li class="flex items-center gap-4 text-base text-brand-textSecondary group/item">
+                                <div class="w-8 h-8 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-red-500/20 transition-colors">
+                                    <i class="fas fa-times text-red-500 text-sm"></i>
+                                </div>
+                                <span>Quem quer só consumir conteúdo e não aplicar</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-base text-brand-textSecondary group/item">
+                                <div class="w-8 h-8 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-red-500/20 transition-colors">
+                                    <i class="fas fa-times text-red-500 text-sm"></i>
+                                </div>
+                                <span>Quem busca teoria mágica sem prática</span>
+                            </li>
+                            <li class="flex items-center gap-4 text-base text-brand-textSecondary group/item">
+                                <div class="w-8 h-8 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-red-500/20 transition-colors">
+                                    <i class="fas fa-times text-red-500 text-sm"></i>
+                                </div>
+                                <span>Quem não está disposto a testar e executar</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: MENTORES -->
+    <section id="mentores" class="py-24 relative overflow-hidden bg-brand-bg border-y border-white/5">
+        <div class="container mx-auto px-6 max-w-[1300px] relative z-10 text-center">
+            <h2 class="text-brand-primary text-xs font-bold uppercase tracking-[0.2em] mb-4">Com quem você vai aprender</h2>
+            <h3 class="text-3xl md:text-5xl font-black font-oswald uppercase text-white leading-tight mb-16">
+                Seus <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#CD9B53] via-[#EBCE85] to-[#B87A40]">Mentores</span>
+            </h3>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-xl hover:shadow-[0_0_40px_rgba(205,155,83,0.25)] hover:border-[#CD9B53]/30 transition-all duration-500" data-aos="fade-up">
+                    <div class="w-32 h-32 mx-auto bg-brand-surface rounded-full border-4 border-[#CD9B53] shadow-[0_0_30px_rgba(205,155,83,0.3)] flex items-center justify-center mb-6 overflow-hidden">
+                        <i class="fas fa-user-tie text-5xl text-brand-primary/50"></i>
+                    </div>
+                    <h4 class="text-2xl font-black font-oswald uppercase text-white mb-2">Rafael Tonietto</h4>
+                    <p class="text-brand-primary font-semibold text-base uppercase tracking-widest mb-4">Especialista em Posicionamento</p>
+                    <p class="text-brand-textSecondary text-base">Focado em estruturar o seu posicionamento digital e técnicas avançadas de vendas exclusivas para consultores digitais no mercado fitness.</p>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-xl hover:shadow-[0_0_40px_rgba(205,155,83,0.25)] hover:border-[#CD9B53]/30 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-32 h-32 mx-auto bg-brand-surface rounded-full border-4 border-[#CD9B53] shadow-[0_0_30px_rgba(205,155,83,0.3)] flex items-center justify-center mb-6 overflow-hidden">
+                        <i class="fas fa-chart-line text-5xl text-brand-primary/50"></i>
+                    </div>
+                    <h4 class="text-2xl font-black font-oswald uppercase text-white mb-2">Artur Monteiro</h4>
+                    <p class="text-brand-primary font-semibold text-base uppercase tracking-widest mb-4">Especialista em Negócios</p>
+                    <p class="text-brand-textSecondary text-base">Estrategista em marketing e negócios focados em escala. Vai te ensinar exatamente como escalar a sua carreira e faturar múltiplos dígitos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: OFERTA E CTA -->
+    <section id="oferta" class="py-32 relative overflow-hidden bg-[#0d221a]">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-primary/10 via-transparent to-transparent"></div>
+        
+        <div class="container mx-auto px-6 max-w-[1300px] relative z-10 text-center">
+            <h2 class="text-4xl md:text-6xl font-black font-oswald uppercase text-white leading-tight mb-8" data-aos="zoom-in">
+                Deixa eu ser <span class="text-brand-primary">direto</span> com você.
+            </h2>
+            
+            <p class="text-base text-brand-textSecondary mb-8" data-aos="fade-up">
+                Você pode continuar postando sem resultado, dependendo só do presencial e vendo outros crescerem no online... <br><br>
+                <strong>Ou pode aprender o caminho certo e começar a construir uma renda que te leve aos primeiros 10K. A decisão é sua.</strong>
+            </p>
+
+            <div class="glass-strong border-2 border-brand-primary rounded-3xl p-10 mt-12 max-w-2xl mx-auto shadow-[0_0_50px_rgba(205,155,83,0.2)]" data-aos="fade-up" data-aos-delay="200">
+                <p class="text-brand-textMuted font-bold uppercase tracking-widest mb-4">O que você recebe hoje:</p>
+                <ul class="text-left space-y-3 mb-8 text-white font-medium">
+                    <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary"></i> Acesso ao workshop completo ao vivo</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary"></i> Estrutura pronta de consultoria online</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary"></i> Roteiros simples de venda</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary"></i> Direcionamento claro de conteúdo</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary"></i> Plano de ação pra chegar nos 10K</li>
+                </ul>
+
+                <div class="text-6xl font-black text-white mb-6">R$ 9,90</div>
+                <p class="text-base text-brand-primary mb-8 font-semibold">Menos de R$ 10 para transformar sua carreira.</p>
+
+                <button onclick="abrirPopup()" class="w-full bg-gradient-to-r from-[#B87A40] via-[#EBCE85] to-[#CD9B53] bg-[length:200%_auto] hover:bg-right border border-[#EBCE85]/50 transition-all duration-500 text-brand-darkgray font-black text-lg uppercase tracking-[0.1em] py-6 rounded-xl transition-all duration-300 shadow-[0_0_40px_rgba(205,155,83,0.5)] hover:shadow-[0_0_60px_rgba(205,155,83,0.7)] hover:-translate-y-1 animate-pulse-slow">
+                    Quero Garantir Minha Vaga
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER OBRIGATÓRIO -->
+    <footer class="bg-brand-darkgray border-t border-white/5 pt-16 pb-24 relative z-20"> 
+        <div class="container mx-auto px-6 max-w-[1300px]"> 
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-12"> 
+                <div class="lg:col-span-4 space-y-4"> 
+                    <a href="#" class="inline-block hover:opacity-80 transition-opacity duration-300 mb-4">
+                        <img src="assets/logoPTA.svg" alt="PTA" class="h-14 w-auto">
+                    </a>
+                    <p class="text-brand-textMuted text-base leading-relaxed max-w-sm"> O evento definitivo para personal trainers estruturarem suas consultorias online do absoluto zero. </p> 
+                </div> 
+                <div class="lg:col-span-2 lg:col-start-7"> 
+                    <h4 class="text-brand-textSecondary font-bold uppercase tracking-widest text-xs mb-6">Navegação</h4> 
+                    <ul class="space-y-3 text-base text-brand-textMuted"> 
+                        <li><a href="#problema" class="hover:text-brand-primary transition-colors duration-200">Por Que</a></li>
+                        <li><a href="#conteudo" class="hover:text-brand-primary transition-colors duration-200">Conteúdo</a></li>
+                        <li><a href="#mentores" class="hover:text-brand-primary transition-colors duration-200">Mentores</a></li>
+                        <li><a href="#oferta" class="hover:text-brand-primary transition-colors duration-200">Acesso</a></li>
+                    </ul> 
+                </div> 
+                <div class="lg:col-span-2"> 
+                    <h4 class="text-brand-textSecondary font-bold uppercase tracking-widest text-xs mb-6">Legal</h4> 
+                    <ul class="space-y-3 text-base text-brand-textMuted"> 
+                        <li><a href="#" class="hover:text-brand-primary transition-colors duration-200">Termos de Uso</a></li> 
+                        <li><a href="#" class="hover:text-brand-primary transition-colors duration-200">Política de Privacidade</a></li> 
+                        <li><a href="#" class="hover:text-brand-primary transition-colors duration-200">Aviso Legal</a></li> 
+                    </ul> 
+                </div> 
+                <div class="lg:col-span-2"> 
+                    <h4 class="text-brand-textSecondary font-bold uppercase tracking-widest text-xs mb-6">Suporte</h4> 
+                    <ul class="space-y-3 text-base text-brand-textMuted"> 
+                        <li><a href="tel:+5541988239396" class="hover:text-brand-success flex items-center gap-2 transition-colors"><i class="fab fa-whatsapp"></i> WhatsApp Suporte</a></li>
+                    </ul> 
+                </div> 
+            </div> 
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"> 
+                <p class="text-brand-textMuted text-xs"> &copy; 2026 Workshop 10K. Todos os direitos reservados. </p> 
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-textMuted"> 
+                    <span class="w-2 h-2 rounded-full bg-brand-success animate-pulse"></span> Ambiente 100% Seguro 
+                </div> 
+            </div> 
+        </div> 
+    </footer>
+
+    <!-- POPUP CAPTURA (ESTRUTURA INTOCÁVEL, EXCETO ID) -->
+    <div id="popup-captura" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#05050A]/90 backdrop-blur-xl" aria-hidden="true">
+        
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="relative bg-brand-bg border border-white/10 rounded-3xl shadow-[0_0_80px_rgba(205,155,83,0.15)] max-w-md w-full p-8 md:p-10 animate-[fadeIn_0.3s_ease-out]">
+            <button type="button" onclick="fecharPopup()" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:bg-brand-primary hover:text-brand-darkgray flex items-center justify-center text-gray-400 transition-all duration-300" aria-label="Fechar">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="text-center mb-8">
+                <div class="text-brand-primary text-[10px] font-black uppercase tracking-[0.2em] mb-2">Acesso Imediato</div>
+                <h3 class="font-black font-oswald text-2xl text-white uppercase tracking-tight mb-2">Garanta sua Vaga</h3>
+                <p class="text-base text-brand-textSecondary">Preencha os dados abaixo para acessar o checkout oficial.</p>
+            </div>
+            
+            <form id="form-workshop10k" class="space-y-4 mt-6 popup-form">
+                <div>
+                    <label for="lead-nome" class="block text-sm font-medium text-gray-300 mb-1">Nome</label>
+                    <input type="text" id="lead-nome" name="nome" required placeholder="Seu nome completo" class="w-full px-4 py-3 rounded-lg bg-brand-bg border border-white/10 text-white placeholder-gray-500 focus:border-brand-primary focus:ring-1 focus:ring-brand-primary outline-none transition">
+                </div>
+                <div>
+                    <label for="lead-email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                    <input type="email" id="lead-email" name="email" required placeholder="seu@email.com" class="w-full px-4 py-3 rounded-lg bg-brand-bg border border-white/10 text-white placeholder-gray-500 focus:border-brand-primary focus:ring-1 focus:ring-brand-primary outline-none transition">
+                </div>
+                <div>
+                    <label for="lead-phone" class="block text-sm font-medium text-gray-300 mb-1">Telefone</label>
+                    <div class="flex rounded-lg overflow-hidden border border-white/10 focus-within:border-brand-primary focus-within:ring-1 focus-within:ring-brand-primary bg-brand-bg">
+                        <span class="inline-flex items-center px-4 py-3 bg-brand-primary text-black font-bold select-none shrink-0">+55</span>
+                        <input type="tel" id="lead-phone" name="phone" required placeholder="(11) 99999-9999" maxlength="15" autocomplete="tel" class="flex-1 px-4 py-3 bg-transparent text-white placeholder-gray-500 outline-none min-w-0 mask-telefone">
+                    </div>
+                    <p class="error-msg text-red-400 text-xs mt-1 hidden">Informe o DDD e o número completo.</p>
+                </div>
+                <!-- ID/Value ocultos para coleta de UTMs -->
+                <input type="hidden" id="utm_source" value="">
+                <input type="hidden" id="utm_medium" value="">
+                <input type="hidden" id="utm_campaign" value="">
+                <input type="hidden" id="utm_term" value="">
+                <input type="hidden" id="utm_content" value="">
+                <input type="hidden" id="url" value="">
+
+                <button type="submit" class="w-full bg-gradient-to-r from-[#B87A40] via-[#EBCE85] to-[#CD9B53] bg-[length:200%_auto] hover:bg-right border border-[#EBCE85]/50 transition-all duration-500 text-brand-darkgray font-sans font-bold py-4 rounded-xl uppercase tracking-widest hover:shadow-[0_0_20px_rgba(205,155,83,0.6)] transition btn-submit mt-2">
+                    Avançar para Pagamento
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPTS OBRIGATÓRIOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // 1. Inicializa AOS Animation
+        AOS.init({ once: true, offset: 50, duration: 800 });
+
+        // 2. Controle do Modal
+        const popup = document.getElementById('popup-captura');
+        function abrirPopup() {
+            popup.classList.remove('hidden');
+            popup.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+        function fecharPopup() {
+            popup.classList.add('hidden');
+            popup.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) fecharPopup();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') fecharPopup();
+        });
+
+        // 4. Máscara de Telefone (Regex BR)
+        const telInput = document.getElementById('lead-phone');
+        telInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); 
+            if (value.startsWith('55') && value.length > 2) value = value.slice(2); 
+            value = value.slice(0, 11); 
+
+            let formatado = value;
+            if (value.length > 2) {
+                formatado = `(${value.slice(0, 2)}) ` + value.slice(2);
+            }
+            if (value.length > 7) {
+                formatado = formatado.slice(0, 10) + '-' + formatado.slice(10);
+            }
+            e.target.value = formatado;
+            
+            const errorMsg = document.querySelector('.error-msg');
+            if (errorMsg) errorMsg.classList.add('hidden');
+        });
+
+        // 5. Captura de UTMs e preenchimento de inputs hidden
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            document.getElementById('utm_source').value = params.get('utm_source') || '';
+            document.getElementById('utm_medium').value = params.get('utm_medium') || '';
+            document.getElementById('utm_campaign').value = params.get('utm_campaign') || '';
+            document.getElementById('utm_term').value = params.get('utm_term') || '';
+            document.getElementById('utm_content').value = params.get('utm_content') || '';
+            document.getElementById('url').value = window.location.href;
+        });
+
+        // 6. Submissão (Webhook Geral + Fallback Rigoroso)
+        const form = document.getElementById('form-workshop10k');
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btnSubmit = this.querySelector('.btn-submit');
+            const errorMsg = this.querySelector('.error-msg');
+            
+            const rawPhone = telInput.value.replace(/\D/g, '');
+            if (rawPhone.length < 10) {
+                errorMsg.classList.remove('hidden');
+                telInput.focus();
+                return;
+            }
+
+            // Estado de processamento
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processando...';
+
+            const nome = document.getElementById('lead-nome').value.trim();
+            const email = document.getElementById('lead-email').value.trim();
+            const telefoneFormatado = '+55' + rawPhone;
+
+            // Payload Obrigatório
+            const payload = {
+                nome: nome,
+                email: email,
+                telefone: telefoneFormatado,
+                utm_source: document.getElementById('utm_source')?.value || '',
+                utm_term: document.getElementById('utm_term')?.value || '',
+                utm_campaign: document.getElementById('utm_campaign')?.value || '',
+                utm_medium: document.getElementById('utm_medium')?.value || '',
+                utm_content: document.getElementById('utm_content')?.value || '',
+                url: document.getElementById('url')?.value || window.location.href
+            };
+
+            // URL do Webhook Geral + Nomenclatura no link
+            const WEBHOOK_URL = 'https://hook.us1.make.com/bj1q14346ezeybpcqjb9ctea89aoatvn?produto=WORKSHOP_10K';
+            
+            // Redirecionamento temporário para o WhatsApp (já que não há checkout definido)
+            const BASE_REDIRECT_URL = 'https://wa.me/5541988239396?text=Quero%20garantir%20minha%20vaga%20no%20Workshop%2010K';
+
+            try {
+                // Fetch para o Make
+                await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (error) {
+                console.error("Erro ao enviar dados para o webhook. Executando fallback.", error);
+            } finally {
+                // Monta Query String e redireciona (Fallback rigoroso)
+                const queryString = `&name=${encodeURIComponent(payload.nome)}&email=${encodeURIComponent(payload.email)}&phone=${encodeURIComponent(payload.telefone)}&utm_source=${encodeURIComponent(payload.utm_source)}&utm_campaign=${encodeURIComponent(payload.utm_campaign)}`;
+                
+                window.location.href = BASE_REDIRECT_URL + queryString;
+            }
+        });
+    </script>
+</body>
+</html>
