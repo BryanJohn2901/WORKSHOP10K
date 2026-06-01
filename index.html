@@ -97,6 +97,20 @@
             box-shadow: 0 0 50px rgba(205, 155, 83, 0.6);
             transform: translateY(-2px);
         }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        @media (min-width: 768px) {
+            .hero-bg--desktop {
+                object-position: center right;
+            }
+        }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-textPrimary font-sans antialiased selection:bg-brand-primary selection:text-white">
@@ -145,11 +159,27 @@
 
     <!-- HERO SECTION -->
     <header id="hero" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-[#052F24] bg-cover bg-center bg-no-repeat md:hidden" style="background-image: url('assets/mobile.webp');"></div>
-            <div class="absolute inset-0 bg-[#052F24] bg-cover bg-center bg-no-repeat hidden md:block" style="background-image: url('assets/web.webp');"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-brand-bg/55 via-brand-bg/30 to-brand-bg/10 md:hidden"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-brand-bg/90 via-brand-bg/50 to-transparent hidden md:block"></div>
+        <div class="absolute inset-0 z-0 bg-[#052F24]">
+            <img
+                src="assets/mobile.webp"
+                alt=""
+                class="hero-bg md:hidden"
+                width="1080"
+                height="1920"
+                fetchpriority="high"
+                decoding="async"
+            >
+            <img
+                src="assets/web.webp"
+                alt=""
+                class="hero-bg hero-bg--desktop hidden md:block"
+                width="1920"
+                height="1080"
+                fetchpriority="high"
+                decoding="async"
+            >
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-bg/55 via-brand-bg/30 to-brand-bg/10 md:hidden" aria-hidden="true"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-bg/90 via-brand-bg/50 to-transparent hidden md:block" aria-hidden="true"></div>
         </div>
 
         <div class="container mx-auto px-6 max-w-[1300px] relative z-10 flex flex-col items-center text-center md:items-start md:text-left">
