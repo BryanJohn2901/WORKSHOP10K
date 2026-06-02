@@ -116,14 +116,22 @@ async function build() {
     const minCSS = new CleanCSS({ level: 2 }).minify(styleMatch[1]).styles;
     fs.writeFileSync(path.join(DIST_CSS, 'style.css'), minCSS);
     console.log('✔  style.css  —', kb(Buffer.byteLength(minCSS)));
+    const heroFadeChecks = ['hero-mobile-visual', 'hero-mobile-fade', '#0a211a'];
+    const missingHeroCss = heroFadeChecks.filter((token) => !minCSS.toLowerCase().includes(token));
+    if (missingHeroCss.length) {
+      throw new Error(`Build abortada: CSS do hero mobile incompleto (${missingHeroCss.join(', ')})`);
+    }
+    console.log('✔  hero mobile (fade #0A211A) — incluído em style.css');
   }
   html = html.replace(/<style>[\s\S]*?<\/style>/, '');
 
   // ── 5. Extrai scripts inline → dist/js/main.js ───────────────────────────
   const scripts = [];
-  html = html.replace(/<script(?![^>]*\bsrc\b)[^>]*>([\s\S]*?)<\/script>/g, (_, body) => {
+  html = html.replace(/<script(?![^>]*\bsrc\b)[^>]*>([\s\S]*?)<\/script>/g, (match, body) => {
     const trimmed = body.trim();
-    if (trimmed && !trimmed.includes('tailwind.config')) scripts.push(trimmed);
+    if (!trimmed || trimmed.includes('tailwind.config')) return '';
+    if (trimmed.includes('googletagmanager') || trimmed.includes('GTM-')) return match;
+    scripts.push(trimmed);
     return '';
   });
 
@@ -131,7 +139,7 @@ async function build() {
     const combined = scripts.join('\n;\n');
     const result = await minifyJS(combined, {
       compress: { passes: 2 },
-      mangle:   { reserved: ['abrirPopup', 'fecharPopup'] },
+      mangle:   { reserved: ['abrirPopup', 'fecharPopup', 'initWorkshopApp', 'buildRedirectUrl', 'buildWebhookUrl'] },
     });
     fs.writeFileSync(path.join(DIST_JS, 'main.js'), result.code);
     console.log('✔  main.js    —', kb(Buffer.byteLength(result.code)));
@@ -185,6 +193,25 @@ async function build() {
   });
   fs.writeFileSync(path.join(DIST, 'index.html'), minHTML);
   console.log('✔  index.html  —', kb(Buffer.byteLength(minHTML)));
+  const heroHtmlChecks = ['hero-mobile-visual', 'hero-mobile-fade', 'profs.webp'];
+  const missingHeroHtml = heroHtmlChecks.filter((token) => !minHTML.includes(token));
+  if (missingHeroHtml.length) {
+    throw new Error(`Build abortada: HTML do hero mobile incompleto (${missingHeroHtml.join(', ')})`);
+  }
+  if (!minHTML.includes('hero-mobile-critical') || !minHTML.includes('linear-gradient')) {
+    throw new Error('Build abortada: CSS crítico do fade do hero ausente em index.html');
+  }
+  const builtJs = fs.existsSync(path.join(DIST_JS, 'main.js'))
+    ? fs.readFileSync(path.join(DIST_JS, 'main.js'), 'utf8')
+    : '';
+  if (!builtJs.includes('preventDefault') || !builtJs.includes('chk.eduzz.com')) {
+    throw new Error('Build abortada: lógica de submit/checkout ausente em main.js');
+  }
+  if (!builtJs.includes('telefone') || builtJs.includes('phone:') || builtJs.includes('"phone"')) {
+    throw new Error('Build abortada: checkout deve usar telefone, não phone');
+  }
+  console.log('✔  hero mobile (markup + fade inline) — incluído em index.html');
+  console.log('✔  form checkout — incluído em main.js');
 
   // ── 12. Processa assets ────────────────────────────────────────────────────
   console.log('\n🖼️  Assets:');

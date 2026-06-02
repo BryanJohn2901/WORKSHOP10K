@@ -113,9 +113,115 @@
             object-fit: cover;
             object-position: center;
         }
+        /* Mobile: imagem em bloco próprio; conteúdo só abaixo (sem sobrepor) */
+        @media (max-width: 767px) {
+            #hero {
+                display: flex;
+                flex-direction: column;
+                height: auto;
+                overflow: visible;
+                background-color: #0A211A;
+            }
+            .hero-mobile-visual {
+                position: relative;
+                width: 100%;
+                flex-shrink: 0;
+                overflow: hidden;
+                background-color: #0A211A;
+                line-height: 0;
+            }
+            .hero-mobile-visual img {
+                display: block;
+                width: 100%;
+                height: auto;
+                vertical-align: top;
+                position: relative;
+                z-index: 0;
+                -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 100%);
+                mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 100%);
+            }
+            .hero-mobile-fade {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 55%;
+                min-height: 9rem;
+                z-index: 5;
+                pointer-events: none;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(10, 33, 26, 0) 0%,
+                    rgba(10, 33, 26, 0.4) 35%,
+                    rgba(10, 33, 26, 0.85) 65%,
+                    #0A211A 100%
+                );
+            }
+            #hero .hero-content-zone {
+                position: relative;
+                z-index: 2;
+                flex: 0 0 auto;
+                margin-top: -0.75rem;
+                padding-top: 0.25rem;
+                background-color: #0A211A;
+            }
+        }
         @media (min-width: 768px) {
+            #hero {
+                display: flex;
+                align-items: center;
+            }
+            #hero .hero-bg-layer {
+                position: absolute;
+                inset: 0;
+                grid-row: auto;
+                grid-column: auto;
+                height: auto;
+                overflow: visible;
+                background-color: #052F24;
+            }
+            #hero .hero-content-zone {
+                grid-row: auto;
+                grid-column: auto;
+                align-self: auto;
+                background-color: transparent;
+            }
             .hero-bg--desktop {
                 object-position: center right;
+            }
+        }
+    </style>
+    <!-- Crítico mobile: permanece inline na build (não vai para style.css) -->
+    <style id="hero-mobile-critical">
+        @media (max-width: 767px) {
+            .hero-mobile-visual::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 55%;
+                min-height: 9rem;
+                z-index: 4;
+                pointer-events: none;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(10, 33, 26, 0) 0%,
+                    rgba(10, 33, 26, 0.5) 40%,
+                    #0A211A 100%
+                );
+            }
+            .hero-mobile-fade {
+                display: block !important;
+                position: absolute !important;
+                z-index: 5 !important;
+            }
+        }
+        @media (min-width: 768px) {
+            .hero-mobile-fade,
+            .hero-mobile-visual::after {
+                display: none !important;
             }
         }
     </style>
@@ -169,31 +275,36 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <header id="hero" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
-        <div class="absolute inset-0 z-0 bg-[#052F24]">
+    <header id="hero" class="relative max-md:overflow-visible overflow-hidden md:min-h-screen md:flex md:items-start md:pt-[210px] md:pb-20">
+        <div class="hero-mobile-visual relative w-full overflow-hidden bg-[#0A211A] md:hidden leading-[0]">
             <img
-                src="assets/mobile3.webp"
-                alt=""
-                class="hero-bg md:hidden"
+                src="assets/profs.webp"
+                alt="Rafael Tonietto, Artur Monteiro e André Albuquerque"
                 width="1080"
-                height="1920"
+                height="1094"
                 fetchpriority="high"
                 decoding="async"
             >
+            <div
+                class="hero-mobile-fade absolute inset-x-0 bottom-0 z-[5] w-full min-h-[9rem] h-[55%] pointer-events-none bg-gradient-to-b from-transparent via-[#0A211A]/80 to-[#0A211A]"
+                aria-hidden="true"
+            ></div>
+        </div>
+
+        <div class="hero-bg-layer hidden md:block absolute inset-0 z-0 bg-[#052F24]">
             <img
                 src="assets/web3.webp"
                 alt=""
-                class="hero-bg hero-bg--desktop hidden md:block"
+                class="hero-bg hero-bg--desktop"
                 width="1920"
                 height="1080"
                 fetchpriority="high"
                 decoding="async"
             >
-            <div class="absolute inset-0 bg-gradient-to-b from-brand-bg/55 via-brand-bg/30 to-brand-bg/10 md:hidden" aria-hidden="true"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-brand-bg/90 via-brand-bg/50 to-transparent hidden md:block" aria-hidden="true"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-bg/90 via-brand-bg/50 to-transparent" aria-hidden="true"></div>
         </div>
 
-        <div class="container mx-auto px-6 max-w-[1300px] relative z-10 flex flex-col items-center text-center md:items-start md:text-left">
+        <div class="hero-content-zone container mx-auto px-6 max-w-[1300px] relative z-10 flex flex-col items-center text-center md:items-start md:text-left w-full pb-8 pt-0 md:pb-0 md:pt-0 max-md:bg-[#0A211A]">
             <img src="assets/dourado.svg" alt="Workshop 10K" class="hidden md:block h-40 w-auto mb-6 object-contain" data-aos="fade-down">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-primary/50 bg-brand-primary/15 text-[#EBCE85] text-xs font-bold uppercase tracking-[0.2em] mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(205,155,83,0.2)]" data-aos="fade-down" data-aos-delay="100">
                 <span class="w-2 h-2 rounded-full bg-brand-primary animate-pulse"></span>
@@ -600,7 +711,14 @@
                 <p class="text-base text-brand-textSecondary">Preencha os dados abaixo para acessar o checkout oficial.</p>
             </div>
             
-            <form id="form_eventos" class="space-y-4 mt-6 popup-form">
+            <form
+                id="form_eventos"
+                class="space-y-4 mt-6 popup-form"
+                data-produto="W-10K"
+                data-webhook="https://hook.us1.make.com/bj1q14346ezeybpcqjb9ctea89aoatvn"
+                data-redirect="https://chk.eduzz.com/KW8ZVAQR01"
+                novalidate
+            >
                 <div>
                     <label for="lead-nome" class="block text-sm font-medium text-gray-300 mb-1">Nome</label>
                     <input type="text" id="lead-nome" name="nome" required placeholder="Seu nome completo" class="w-full px-4 py-3 rounded-lg bg-brand-bg border border-white/10 text-white placeholder-gray-500 focus:border-brand-primary focus:ring-1 focus:ring-brand-primary outline-none transition">
@@ -610,20 +728,20 @@
                     <input type="email" id="lead-email" name="email" required placeholder="seu@email.com" class="w-full px-4 py-3 rounded-lg bg-brand-bg border border-white/10 text-white placeholder-gray-500 focus:border-brand-primary focus:ring-1 focus:ring-brand-primary outline-none transition">
                 </div>
                 <div>
-                    <label for="lead-phone" class="block text-sm font-medium text-gray-300 mb-1">Telefone</label>
+                    <label for="lead-telefone" class="block text-sm font-medium text-gray-300 mb-1">Telefone</label>
                     <div class="flex rounded-lg overflow-hidden border border-white/10 focus-within:border-brand-primary focus-within:ring-1 focus-within:ring-brand-primary bg-brand-bg">
                         <span class="inline-flex items-center px-4 py-3 bg-brand-primary text-black font-bold select-none shrink-0">+55</span>
-                        <input type="tel" id="lead-phone" name="phone" required placeholder="(11) 99999-9999" maxlength="15" autocomplete="tel" class="flex-1 px-4 py-3 bg-transparent text-white placeholder-gray-500 outline-none min-w-0 mask-telefone">
+                        <input type="tel" id="lead-telefone" name="telefone" required placeholder="(11) 99999-9999" maxlength="15" autocomplete="tel" class="lead-phone flex-1 px-4 py-3 bg-transparent text-white placeholder-gray-500 outline-none min-w-0 mask-telefone">
                     </div>
                     <p class="error-msg text-red-400 text-xs mt-1 hidden">Informe o DDD e o número completo.</p>
                 </div>
                 <!-- ID/Value ocultos para coleta de UTMs -->
-                <input type="hidden" id="utm_source" value="">
-                <input type="hidden" id="utm_medium" value="">
-                <input type="hidden" id="utm_campaign" value="">
-                <input type="hidden" id="utm_term" value="">
-                <input type="hidden" id="utm_content" value="">
-                <input type="hidden" id="url" value="">
+                <input type="hidden" id="utm_source" name="utm_source" value="">
+                <input type="hidden" id="utm_medium" name="utm_medium" value="">
+                <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
+                <input type="hidden" id="utm_term" name="utm_term" value="">
+                <input type="hidden" id="utm_content" name="utm_content" value="">
+                <input type="hidden" id="url" name="url" value="">
 
                 <button type="submit" class="w-full bg-gradient-to-r from-[#B87A40] via-[#EBCE85] to-[#CD9B53] bg-[length:200%_auto] hover:bg-right border border-[#EBCE85]/50 transition-all duration-500 text-brand-darkgray font-sans font-bold py-4 rounded-xl uppercase tracking-widest hover:shadow-[0_0_20px_rgba(205,155,83,0.6)] transition btn-submit mt-2">
                     Avançar para Pagamento
@@ -635,121 +753,152 @@
     <!-- SCRIPTS OBRIGATÓRIOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // 1. Inicializa AOS Animation
-        AOS.init({ once: true, offset: 50, duration: 800 });
-
-        // 2. Controle do Modal
-        const popup = document.getElementById('popup-captura');
         function abrirPopup() {
+            const popup = document.getElementById('popup-captura');
+            if (!popup) return;
             popup.classList.remove('hidden');
             popup.classList.add('flex');
+            popup.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
         }
+
         function fecharPopup() {
+            const popup = document.getElementById('popup-captura');
+            if (!popup) return;
             popup.classList.add('hidden');
             popup.classList.remove('flex');
+            popup.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
         }
-        popup.addEventListener('click', (e) => {
-            if (e.target === popup) fecharPopup();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') fecharPopup();
-        });
 
-        // 4. Máscara de Telefone (Regex BR)
-        const telInput = document.getElementById('lead-phone');
-        telInput.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, ''); 
-            if (value.startsWith('55') && value.length > 2) value = value.slice(2); 
-            value = value.slice(0, 11); 
+        const WEBHOOK_URL = 'https://hook.us1.make.com/bj1q14346ezeybpcqjb9ctea89aoatvn?produto=W-10K';
+        const BASE_REDIRECT_URL = 'https://chk.eduzz.com/KW8ZVAQR01';
 
-            let formatado = value;
-            if (value.length > 2) {
-                formatado = `(${value.slice(0, 2)}) ` + value.slice(2);
-            }
-            if (value.length > 7) {
-                formatado = formatado.slice(0, 10) + '-' + formatado.slice(10);
-            }
-            e.target.value = formatado;
-            
-            const errorMsg = document.querySelector('.error-msg');
-            if (errorMsg) errorMsg.classList.add('hidden');
-        });
-
-        // 5. Captura de UTMs e preenchimento de inputs hidden
-        document.addEventListener('DOMContentLoaded', () => {
+        function syncTrackingFields() {
             const params = new URLSearchParams(window.location.search);
-            document.getElementById('utm_source').value = params.get('utm_source') || '';
-            document.getElementById('utm_medium').value = params.get('utm_medium') || '';
-            document.getElementById('utm_campaign').value = params.get('utm_campaign') || '';
-            document.getElementById('utm_term').value = params.get('utm_term') || '';
-            document.getElementById('utm_content').value = params.get('utm_content') || '';
-            document.getElementById('url').value = window.location.href;
-        });
-
-        // 6. Submissão (Webhook Geral + Fallback Rigoroso)
-        const form = document.getElementById('form_eventos');
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const btnSubmit = this.querySelector('.btn-submit');
-            const errorMsg = this.querySelector('.error-msg');
-            
-            const rawPhone = telInput.value.replace(/\D/g, '');
-            if (rawPhone.length < 10) {
-                errorMsg.classList.remove('hidden');
-                telInput.focus();
-                return;
-            }
-
-            // Estado de processamento
-            btnSubmit.disabled = true;
-            btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processando...';
-
-            const nome = document.getElementById('lead-nome').value.trim();
-            const email = document.getElementById('lead-email').value.trim();
-            const telefone = '+55' + rawPhone;
-
-            const payload = {
-                nome: nome,
-                email: email,
-                telefone: telefone,
-                utm_source: document.getElementById('utm_source')?.value || '',
-                utm_term: document.getElementById('utm_term')?.value || '',
-                utm_campaign: document.getElementById('utm_campaign')?.value || '',
-                utm_medium: document.getElementById('utm_medium')?.value || '',
-                utm_content: document.getElementById('utm_content')?.value || '',
-                url: document.getElementById('url')?.value || window.location.href
+            const set = (id, val) => {
+                const el = document.getElementById(id);
+                if (el) el.value = val;
             };
+            set('utm_source', params.get('utm_source') || '');
+            set('utm_medium', params.get('utm_medium') || '');
+            set('utm_campaign', params.get('utm_campaign') || '');
+            set('utm_term', params.get('utm_term') || '');
+            set('utm_content', params.get('utm_content') || '');
+            set('url', window.location.href);
+        }
 
-            const WEBHOOK_URL = 'https://hook.us1.make.com/bj1q14346ezeybpcqjb9ctea89aoatvn?produto=W-10K';
-            const BASE_REDIRECT_URL = 'https://chk.eduzz.com/KW8ZVAQR01';
+        function bindPhoneMask(input) {
+            if (!input) return;
+            input.addEventListener('input', function (e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.startsWith('55') && value.length > 2) value = value.slice(2);
+                value = value.slice(0, 11);
 
-            try {
-                await fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-            } catch (error) {
-                console.error("Erro ao enviar dados para o webhook. Executando fallback.", error);
-            } finally {
-                const checkoutParams = new URLSearchParams({
-                    name: payload.nome,
-                    email: payload.email,
-                    telefone: payload.telefone,
-                    utm_source: payload.utm_source,
-                    utm_term: payload.utm_term,
-                    utm_campaign: payload.utm_campaign,
-                    utm_medium: payload.utm_medium,
-                    utm_content: payload.utm_content,
-                    url: payload.url
-                });
+                let formatado = value;
+                if (value.length > 2) formatado = `(${value.slice(0, 2)}) ` + value.slice(2);
+                if (value.length > 7) formatado = formatado.slice(0, 10) + '-' + formatado.slice(10);
+                e.target.value = formatado;
 
-                window.location.href = `${BASE_REDIRECT_URL}?${checkoutParams.toString()}`;
+                const form = e.target.closest('form');
+                const errorMsg = form?.querySelector('.error-msg');
+                if (errorMsg) errorMsg.classList.add('hidden');
+            });
+        }
+
+        function initWorkshopApp() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 50, duration: 800 });
             }
-        });
+
+            const popup = document.getElementById('popup-captura');
+            if (popup) {
+                popup.addEventListener('click', (e) => {
+                    if (e.target === popup) fecharPopup();
+                });
+            }
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') fecharPopup();
+            });
+
+            syncTrackingFields();
+
+            document.querySelectorAll('.popup-form').forEach((form) => {
+                bindPhoneMask(form.querySelector('.lead-phone'));
+
+                form.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+
+                    const btnSubmit = this.querySelector('.btn-submit');
+                    const errorMsg = this.querySelector('.error-msg');
+                    const telInput = document.getElementById('lead-telefone');
+                    const nome = document.getElementById('lead-nome').value.trim();
+                    const email = document.getElementById('lead-email').value.trim();
+                    const rawPhone = (telInput?.value || '').replace(/\D/g, '');
+
+                    if (rawPhone.length < 10) {
+                        if (errorMsg) errorMsg.classList.remove('hidden');
+                        telInput?.focus();
+                        return;
+                    }
+
+                    syncTrackingFields();
+
+                    if (btnSubmit) {
+                        btnSubmit.disabled = true;
+                        btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processando...';
+                    }
+
+                    const telefone = '+55' + rawPhone;
+
+                    const payload = {
+                        nome: nome,
+                        email: email,
+                        telefone: telefone,
+                        utm_source: document.getElementById('utm_source')?.value || '',
+                        utm_term: document.getElementById('utm_term')?.value || '',
+                        utm_campaign: document.getElementById('utm_campaign')?.value || '',
+                        utm_medium: document.getElementById('utm_medium')?.value || '',
+                        utm_content: document.getElementById('utm_content')?.value || '',
+                        url: document.getElementById('url')?.value || window.location.href
+                    };
+
+                    try {
+                        const controller = new AbortController();
+                        const timeout = setTimeout(() => controller.abort(), 6000);
+                        await fetch(WEBHOOK_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload),
+                            signal: controller.signal
+                        });
+                        clearTimeout(timeout);
+                    } catch (error) {
+                        console.error('Erro ao enviar dados para o webhook. Redirecionando mesmo assim.', error);
+                    } finally {
+                        const checkoutParams = new URLSearchParams({
+                            name: payload.nome,
+                            email: payload.email,
+                            telefone: payload.telefone,
+                            utm_source: payload.utm_source,
+                            utm_term: payload.utm_term,
+                            utm_campaign: payload.utm_campaign,
+                            utm_medium: payload.utm_medium,
+                            utm_content: payload.utm_content,
+                            url: payload.url
+                        });
+
+                        window.location.href = `${BASE_REDIRECT_URL}?${checkoutParams.toString()}`;
+                    }
+                });
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initWorkshopApp);
+        } else {
+            initWorkshopApp();
+        }
     </script>
 </body>
 </html>
