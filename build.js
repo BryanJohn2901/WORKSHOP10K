@@ -67,12 +67,12 @@ const SEO_TAGS = `
     <meta property="og:locale" content="pt_BR">
     <meta property="og:title" content="Workshop 10K com Consultoria Online">
     <meta property="og:description" content="${DESCRIPTION}">
-    <meta property="og:image" content="${CANONICAL}assets/web.webp">
+    <meta property="og:image" content="${CANONICAL}assets/web3.webp">
     <meta property="og:url" content="${CANONICAL}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Workshop 10K com Consultoria Online">
     <meta name="twitter:description" content="${DESCRIPTION}">
-    <meta name="twitter:image" content="${CANONICAL}assets/web.webp">
+    <meta name="twitter:image" content="${CANONICAL}assets/web3.webp">
     <link rel="preconnect" href="https://unpkg.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://hook.us1.make.com">
